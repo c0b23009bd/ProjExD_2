@@ -2,6 +2,7 @@ import os
 import sys
 import pygame as pg
 import random
+import time 
 
 WIDTH, HEIGHT = 1100, 650
 DELTA = {
@@ -25,7 +26,22 @@ def check_bound(obj_rct: pg.Rect) -> tuple[bool,bool]:
         yoko = False
     if obj_rct.top < 0 or HEIGHT < obj_rct.bottom:
         tate = False
-    return yoko,tate        
+    return yoko,tate
+
+
+
+def game_over(screen):
+    """ゲームオーバー画面を表示する"""
+    font = pg.font.Font(None, 80)  # フォントとサイズの設定
+    text = font.render("Game Over", True, (255,255,255))  # 赤色で「Game Over」を作成
+    screen.fill((0, 0, 0))  # 画面をブラックアウト
+    screen.blit(text, (WIDTH//2 - 150, HEIGHT//2 - 40))  # 「Game Over」の位置調整
+    pg.display.update()  # 画面を更新
+    time.sleep(5)  # 5秒間表示する
+    return
+
+
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
