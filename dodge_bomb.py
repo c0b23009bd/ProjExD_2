@@ -34,6 +34,7 @@ def create_bomb_images_and_accs() -> tuple[list[pg.Surface], list[int]]:
     bb_imgs = []
     bb_accs = [a for a in range(1, 11)]  # 加速度リスト（1から10まで）
     
+    #拡大爆弾Surfaceのリスト
     for r in range(1, 11):
         bb_img = pg.Surface((20 * r, 20 * r), pg.SRCALPHA)
         pg.draw.circle(bb_img, (255, 0, 0), (10 * r, 10 * r), 10 * r)
