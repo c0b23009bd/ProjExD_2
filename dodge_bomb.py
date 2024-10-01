@@ -52,6 +52,23 @@ def game_over(screen, kk_rct):
 
 
 
+def big_bomb_img():
+    """爆弾の拡大画像をリストで返す"""
+    bb_imgs = []
+    for r in range(1, 11):  # 爆弾の大きさを10段階にする
+        bb_img = pg.Surface((20*r, 20*r), pg.SRCALPHA)  # rに応じたサイズのSurface
+        pg.draw.circle(bb_img, (255, 0, 0), (10*r, 10*r), 10*r)  # 赤い爆弾を描く
+        bb_imgs.append(bb_img)
+    return bb_imgs
+
+
+
+def create_bomb_speeds():
+    """爆弾の速度をリストで返す関数"""
+    bb_accs = [a for a in range(1, 11)]  # 1から10の加速度リスト
+    return bb_accs
+
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -59,6 +76,7 @@ def main():
     kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
+    
     bb_img = pg.Surface([20,20])  # 空のsurface
     bb_img.set_colorkey((0,0,0))
     pg.draw.circle(bb_img,(255,0,0),(10,10),10)
