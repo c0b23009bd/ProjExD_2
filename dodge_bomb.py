@@ -32,37 +32,23 @@ def check_bound(obj_rct: pg.Rect) -> tuple[bool,bool]:
 
 def game_over(screen, kk_rct):
     """ゲームオーバー時の画面を表示"""
-    # 画面全体を黒で塗りつぶす
-    blackout = pg.Surface((WIDTH, HEIGHT))
-    blackout.fill((0, 0, 0))
+    blackout = pg.Surface((WIDTH, HEIGHT))  # ブラックアウト用のSurface
+    blackout.fill((0, 0, 0))  #画面を黒くする   
     blackout.set_alpha(150)  # 半透明にする
-    screen.blit(blackout, (0, 0))
+    screen.blit(blackout, (0, 0))  #画面に反映
 
-    # 泣いているこうかとんの画像を表示
-    sad_kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
-    screen.blit(sad_kk_img, kk_rct)
+    sad_kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)  # 泣いているこうかとん画像
+    screen.blit(sad_kk_img, kk_rct)  # こうかとんを画面に描画
 
-    # Game Overの文字を表示
-    font = pg.font.Font(None, 80)
-    text = font.render("Game Over", True, (255, 0, 0))
-    text_rct = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-    screen.blit(text, text_rct)
 
-    # 画面更新
-    pg.display.update()
+    font = pg.font.Font(None, 80)  # フォントとサイズの設定
+    text = font.render("Game Over", True, (255, 255, 255))  # game over の色設定
+    text_rct = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))  #文字の位置
+    screen.blit(text, text_rct)  #文字を画面に表示
 
-    # 5秒間表示する
-    time.sleep(5)
+    pg.display.update()  # 画面更新
 
-# def game_over(screen):
-#     """ゲームオーバー画面を表示する"""
-#     font = pg.font.Font(None, 80)  # フォントとサイズの設定
-#     text = font.render("Game Over", True, (255,255,255))  # 赤色で「Game Over」を作成
-#     screen.fill((0, 0, 0))  # 画面をブラックアウト
-#     screen.blit(text, (WIDTH//2 - 150, HEIGHT//2 - 40))  # 「Game Over」の位置調整
-#     pg.display.update()  # 画面を更新
-#     time.sleep(5)  # 5秒間表示する
-#     return
+    time.sleep(5)  # 5秒間表示する
 
 
 
