@@ -63,6 +63,7 @@ def main():
                 return
         screen.blit(bg_img, [0, 0]) 
         if kk_rct.colliderect(bb_rct):  # こうかとんと爆弾が重なったら
+            game_over(screen)  # 画面にgame_overを表示
             return
         
         key_lst = pg.key.get_pressed()
