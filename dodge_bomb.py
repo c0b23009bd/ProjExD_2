@@ -30,15 +30,39 @@ def check_bound(obj_rct: pg.Rect) -> tuple[bool,bool]:
 
 
 
-def game_over(screen):
-    """ゲームオーバー画面を表示する"""
-    font = pg.font.Font(None, 80)  # フォントとサイズの設定
-    text = font.render("Game Over", True, (255,255,255))  # 赤色で「Game Over」を作成
-    screen.fill((0, 0, 0))  # 画面をブラックアウト
-    screen.blit(text, (WIDTH//2 - 150, HEIGHT//2 - 40))  # 「Game Over」の位置調整
-    pg.display.update()  # 画面を更新
-    time.sleep(5)  # 5秒間表示する
-    return
+def game_over(screen, kk_rct):
+    """ゲームオーバー時の画面を表示"""
+    # 画面全体を黒で塗りつぶす
+    blackout = pg.Surface((WIDTH, HEIGHT))
+    blackout.fill((0, 0, 0))
+    blackout.set_alpha(150)  # 半透明にする
+    screen.blit(blackout, (0, 0))
+
+    # 泣いているこうかとんの画像を表示
+    sad_kk_img = pg.transform.rotozoom(pg.image.load("fig/8.png"), 0, 0.9)
+    screen.blit(sad_kk_img, kk_rct)
+
+    # Game Overの文字を表示
+    font = pg.font.Font(None, 80)
+    text = font.render("Game Over", True, (255, 0, 0))
+    text_rct = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+    screen.blit(text, text_rct)
+
+    # 画面更新
+    pg.display.update()
+
+    # 5秒間表示する
+    time.sleep(5)
+
+# def game_over(screen):
+#     """ゲームオーバー画面を表示する"""
+#     font = pg.font.Font(None, 80)  # フォントとサイズの設定
+#     text = font.render("Game Over", True, (255,255,255))  # 赤色で「Game Over」を作成
+#     screen.fill((0, 0, 0))  # 画面をブラックアウト
+#     screen.blit(text, (WIDTH//2 - 150, HEIGHT//2 - 40))  # 「Game Over」の位置調整
+#     pg.display.update()  # 画面を更新
+#     time.sleep(5)  # 5秒間表示する
+#     return
 
 
 
@@ -63,7 +87,7 @@ def main():
                 return
         screen.blit(bg_img, [0, 0]) 
         if kk_rct.colliderect(bb_rct):  # こうかとんと爆弾が重なったら
-            game_over(screen)  # 画面にgame_overを表示
+            game_over(screen,kk_rct)  # 画面にgame_overを表示
             return
         
         key_lst = pg.key.get_pressed()
